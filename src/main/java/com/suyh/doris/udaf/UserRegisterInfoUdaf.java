@@ -65,9 +65,9 @@ public class UserRegisterInfoUdaf {
 
         if (state.minCtime > ctime) {
             state.minCtime = ctime;
-            state.sourceTb = sourceTb;
-            state.id = id;
-            state.gaid = gaid;
+            state.sourceTb = sourceTb == null ? "" : sourceTb;
+            state.id = id == null ? 0L : id;
+            state.gaid = gaid == null ? "" : gaid;
         }
     }
 
