@@ -1,4 +1,4 @@
-package com.suyh.doris.udf.util;
+package com.suyh.doris.util;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

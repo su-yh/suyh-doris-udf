@@ -1,6 +1,6 @@
 package com.suyh.doris.udf;
 
-import com.suyh.doris.udf.util.DateUtils;
+import com.suyh.doris.util.DateUtils;
 import org.apache.hadoop.hive.ql.exec.UDF;
 
 /**
