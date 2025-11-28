@@ -15,23 +15,35 @@ public class UserRegisterInfoUdaf {
         private static final long serialVersionUID = 2595606523789532805L;
 
         /*some variables if you need */
-        public long minCtime = Long.MAX_VALUE;
-        public Long id = 0L;
         public String sourceTb = "";
+        public Long id = 0L;
+        public String uid = "";
+        public String channel = "";
+        public long minCtime = Long.MAX_VALUE;
         public String gaid = "";
+        public String pn = "";
+        public Integer day = 0;
 
         public void reset() {
-            this.minCtime = Long.MAX_VALUE;;
-            this.id = 0L;
             this.sourceTb = "";
+            this.id = 0L;
+            this.uid = "";
+            this.channel = "";
+            this.minCtime = Long.MAX_VALUE;;
             this.gaid = "";
+            this.pn = "";
+            this.day = 0;
         }
 
         public void merge(State rhs) {
-            this.minCtime = rhs.minCtime;;
-            this.id = rhs.id;
             this.sourceTb = rhs.sourceTb;
+            this.id = rhs.id;
+            this.uid = rhs.uid;
+            this.channel = rhs.channel;
+            this.minCtime = rhs.minCtime;;
             this.gaid = rhs.gaid;
+            this.pn = rhs.pn;
+            this.day = rhs.day;
         }
     }
 
@@ -58,7 +70,9 @@ public class UserRegisterInfoUdaf {
      */
     /*required*/
     //first argument is State, then other types your input
-    public void add(State state, String sourceTb, Long id, Long ctime, String gaid) throws Exception {
+    public void add(
+            State state,
+            String sourceTb, Long id, String uid, String channel, Long ctime, String gaid, String pn, Integer day) throws Exception {
         /* here doing update work when input data*/
         // if (val != null) {
         //     state.sum += val;
@@ -68,10 +82,14 @@ public class UserRegisterInfoUdaf {
         }
 
         if (state.minCtime > ctime) {
-            state.minCtime = ctime;
             state.sourceTb = sourceTb == null ? "" : sourceTb;
             state.id = id == null ? 0L : id;
+            state.uid = uid == null ? "" : uid;
+            state.channel = channel == null ? "" : channel;
+            state.minCtime = ctime;
             state.gaid = gaid == null ? "" : gaid;
+            state.pn = pn == null || pn.isEmpty() ? "hy" : pn;
+            state.day = day == null ? 0 : day;
         }
     }
 
@@ -89,19 +107,27 @@ public class UserRegisterInfoUdaf {
     /*required*/
     public void serialize(State state, DataOutputStream out) throws IOException {
         /* serialize some data into buffer */
-        out.writeLong(state.minCtime);
         out.writeUTF(state.sourceTb);
         out.writeLong(state.id);
+        out.writeUTF(state.uid);
+        out.writeUTF(state.channel);
+        out.writeLong(state.minCtime);
         out.writeUTF(state.gaid);
+        out.writeUTF(state.pn);
+        out.writeInt(state.day);
     }
 
     /*required*/
     public void deserialize(State state, DataInputStream in) throws IOException {
         /* deserialize get data from buffer before you put */
-        state.minCtime = in.readLong();
         state.sourceTb = in.readUTF();
         state.id = in.readLong();
+        state.uid = in.readUTF();
+        state.channel = in.readUTF();
+        state.minCtime = in.readLong();
         state.gaid = in.readUTF();
+        state.pn = in.readUTF();
+        state.day = in.readInt();
     }
 
     public ArrayList<Object> getValue(State state) throws Exception {
@@ -111,8 +137,12 @@ public class UserRegisterInfoUdaf {
         ArrayList<Object> arrays = new ArrayList<>();
         arrays.add(state.sourceTb);
         arrays.add(state.id);
-        arrays.add(state.gaid);
+        arrays.add(state.uid);
+        arrays.add(state.channel);
         arrays.add(state.minCtime);
+        arrays.add(state.gaid);
+        arrays.add(state.pn);
+        arrays.add(state.day);
         return arrays;
     }
 }
