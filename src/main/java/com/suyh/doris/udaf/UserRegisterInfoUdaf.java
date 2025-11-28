@@ -12,15 +12,15 @@ public class UserRegisterInfoUdaf {
     public static class State {
         /*some variables if you need */
         private long minCtime = Long.MAX_VALUE;
-        private Long id;
-        private String sourceTb;
-        private String gaid;
+        private Long id = 0L;
+        private String sourceTb = "";
+        private String gaid = "";
 
         public void reset() {
             this.minCtime = Long.MAX_VALUE;;
-            this.id = null;
-            this.sourceTb = null;
-            this.gaid = null;
+            this.id = 0L;
+            this.sourceTb = "";
+            this.gaid = "";
         }
 
         public void merge(State rhs) {
@@ -32,9 +32,9 @@ public class UserRegisterInfoUdaf {
     }
 
     /*required*/
-    public UserRegisterInfoUdaf.State create() {
+    public State create() {
         /* here could do some init work if needed */
-        return new UserRegisterInfoUdaf.State();
+        return new State();
     }
 
     /*required*/
