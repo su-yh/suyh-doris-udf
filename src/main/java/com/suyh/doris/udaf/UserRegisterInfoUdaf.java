@@ -3,18 +3,22 @@ package com.suyh.doris.udaf;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * @author suyh
  * @since 2025-11-28
  */
 public class UserRegisterInfoUdaf {
-    public static class State {
+    public static class State implements Serializable {
+        private static final long serialVersionUID = 2595606523789532805L;
+
         /*some variables if you need */
-        private long minCtime = Long.MAX_VALUE;
-        private Long id = 0L;
-        private String sourceTb = "";
-        private String gaid = "";
+        public long minCtime = Long.MAX_VALUE;
+        public Long id = 0L;
+        public String sourceTb = "";
+        public String gaid = "";
 
         public void reset() {
             this.minCtime = Long.MAX_VALUE;;
@@ -100,8 +104,15 @@ public class UserRegisterInfoUdaf {
         state.gaid = in.readUTF();
     }
 
-    public String getValue(State state) throws Exception {
+    public ArrayList<Object> getValue(State state) throws Exception {
         /* return finally result */
-        return state.sourceTb + " &&@@ " + state.id + " &&@@ " + state.gaid + " &&@@ " + state.minCtime;
+        // return state.sourceTb + " &&@@ " + state.id + " &&@@ " + state.gaid + " &&@@ " + state.minCtime;
+
+        ArrayList<Object> arrays = new ArrayList<>();
+        arrays.add(state.sourceTb);
+        arrays.add(state.id);
+        arrays.add(state.gaid);
+        arrays.add(state.minCtime);
+        return arrays;
     }
 }
