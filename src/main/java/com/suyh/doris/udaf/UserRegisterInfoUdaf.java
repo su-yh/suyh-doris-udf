@@ -29,7 +29,7 @@ public class UserRegisterInfoUdaf {
             this.id = 0L;
             this.uid = "";
             this.channel = "";
-            this.minCtime = Long.MAX_VALUE;;
+            this.minCtime = Long.MAX_VALUE;
             this.gaid = "";
             this.pn = "";
             this.day = 0;
@@ -40,7 +40,7 @@ public class UserRegisterInfoUdaf {
             this.id = rhs.id;
             this.uid = rhs.uid;
             this.channel = rhs.channel;
-            this.minCtime = rhs.minCtime;;
+            this.minCtime = rhs.minCtime;
             this.gaid = rhs.gaid;
             this.pn = rhs.pn;
             this.day = rhs.day;
